@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Juego</title>
+</head>
+<body>
+<h1>Registrar Nuevo Juego</h1>
+
+<form action="#" th:action="@{/game/new}" method="post">
+
+    <label for="name">Nombre:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="numMaxPlayers">Máximo de Jugadores:</label><br>
+    <input type="number" id="numMaxPlayers" name="numMaxPlayers" min="1" required><br><br>
+
+    <label for="platform">Plataforma:</label><br>
+    <select id="platform" name="platform">
+        <option th:each="p : ${T(com.daw.competitionGames.shared.domain.Platform).values()}"
+                th:value="${p}" th:text="${p}"></option>
+    </select><br><br>
+
+    <label for="description">Descripción:</label><br>
+    <textarea id="description" name="description"></textarea><br><br>
+
+    <button type="submit">Guardar Juego</button>
+</form>
+
+<br>
+<a href="/">Volver a la lista</a>
+</body>
+</html>
