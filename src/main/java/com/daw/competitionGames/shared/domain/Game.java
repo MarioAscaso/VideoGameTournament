@@ -18,6 +18,8 @@ public class Game {
 
     private Platform platform;
 
+    public Game(){}
+
     public Game(String name, int numMaxPlayers, String description, Platform platform) {
         this.name = name;
         this.numMaxPlayers = numMaxPlayers;

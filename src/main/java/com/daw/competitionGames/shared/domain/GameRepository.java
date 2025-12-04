@@ -11,8 +11,6 @@ public interface GameRepository {
 
     List<Game> findAll();
 
-    List<Game> findAllByOrder();
-
     void delete(Game game);
 
 }
