@@ -15,8 +15,8 @@
     <label for="numMaxPlayers">Máximo de Jugadores:</label><br>
     <input type="number" id="numMaxPlayers" name="numMaxPlayers" min="1" required><br><br>
 
-    <label for="platform">Plataforma:</label><br>
-    <select id="platform" name="platform">
+    <label for="associatedID">Plataforma:</label><br>
+    <select id="associatedID" name="associatedID">
         <option th:each="p : ${T(com.daw.competitionGames.shared.domain.Platform).values()}"
                 th:value="${p}" th:text="${p}"></option>
     </select><br><br>
@@ -29,5 +29,6 @@
 
 <br>
 <a href="/">Volver a la lista</a>
+<script src="../static/form.js"></script>
 </body>
 </html>
