@@ -11,6 +11,6 @@ public interface GameRepository {
 
     List<Game> findAll();
 
-    void delete(Game game);
+    void deleteById(Long id);
 
 }

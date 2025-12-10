@@ -17,9 +17,10 @@ public class CreateNewGameService {
     public void execute(NewGameRequest request) {
         Game game = new Game(
                 request.getName(),
-                request.getNumMaxPlayers(),
                 request.getDescription(),
-                request.getPlatform()
+                request.getAssociatedID(),
+                request.getBannerImage(),
+                request.getCardImage()
         );
 
         gameRepository.save(game);

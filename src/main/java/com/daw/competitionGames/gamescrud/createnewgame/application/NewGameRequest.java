@@ -1,30 +1,34 @@
 package com.daw.competitionGames.gamescrud.createnewgame.application;
 
-import com.daw.competitionGames.shared.domain.Platform;
+import com.daw.competitionGames.shared.domain.AssociatedID;
 
 public class NewGameRequest {
 
     private String name;
-    private int numMaxPlayers;
     private String description;
-    private Platform platform;
+    private AssociatedID associatedID;
+    private String bannerImage;
+    private String cardImage;
 
     public NewGameRequest(){}
 
-    public NewGameRequest(String name, int numMaxPlayers, String description, Platform platform) {
+    public NewGameRequest(String name, String description, AssociatedID associatedID, String bannerImage, String cardImage) {
         this.name = name;
-        this.numMaxPlayers = numMaxPlayers;
         this.description = description;
-        this.platform = platform;
+        this.associatedID = associatedID;
+        this.bannerImage = bannerImage;
+        this.cardImage = cardImage;
     }
 
     public String getName() {return name;}
-    public int getNumMaxPlayers() {return numMaxPlayers;}
     public String getDescription() {return description;}
-    public Platform getPlatform() {return platform;}
+    public AssociatedID getAssociatedID() {return associatedID;}
+    public String getBannerImage() {return bannerImage;}
+    public String getCardImage() {return cardImage;}
 
     public void setName(String name) {this.name = name;}
-    public void setNumMaxPlayers(int numMaxPlayers) {this.numMaxPlayers = numMaxPlayers;}
     public void setDescription(String description) {this.description = description;}
-    public void setPlatform(Platform platform) {this.platform = platform;}
+    public void setPlatform(AssociatedID associatedID) {this.associatedID = associatedID;}
+    public void setBannerImage(String bannerImage) {this.bannerImage = bannerImage;}
+    public void setCardImage(String cardImage) {this.cardImage = cardImage;}
 }
