@@ -12,17 +12,20 @@
     <label for="name">Nombre:</label><br>
     <input type="text" id="name" name="name" required><br><br>
 
-    <label for="numMaxPlayers">Máximo de Jugadores:</label><br>
-    <input type="number" id="numMaxPlayers" name="numMaxPlayers" min="1" required><br><br>
-
-    <label for="associatedID">Plataforma:</label><br>
+    <label for="associatedID">Plataforma (ID Asociado):</label><br>
     <select id="associatedID" name="associatedID">
-        <option th:each="p : ${T(com.daw.competitionGames.shared.domain.Platform).values()}"
+        <option th:each="p : ${T(com.daw.competitionGames.shared.domain.AssociatedID).values()}"
                 th:value="${p}" th:text="${p}"></option>
     </select><br><br>
 
     <label for="description">Descripción:</label><br>
     <textarea id="description" name="description"></textarea><br><br>
+
+    <label for="bannerImage">URL Imagen Banner:</label><br>
+    <input type="text" id="bannerImage" name="bannerImage"><br><br>
+
+    <label for="cardImage">URL Imagen Carta:</label><br>
+    <input type="text" id="cardImage" name="cardImage"><br><br>
 
     <button type="submit">Guardar Juego</button>
 </form>
