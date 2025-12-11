@@ -7,7 +7,7 @@
 <body>
 <h1>Registrar Nuevo Juego</h1>
 
-<form action="#" th:action="@{/game/new}" method="post">
+<form action="#" th:action="@{/game/new}" method="post" enctype="multipart/form-data">
 
     <label for="name">Nombre:</label><br>
     <input type="text" id="name" name="name" required><br><br>
@@ -21,11 +21,11 @@
     <label for="description">Descripción:</label><br>
     <textarea id="description" name="description"></textarea><br><br>
 
-    <label for="bannerImage">URL Imagen Banner:</label><br>
-    <input type="text" id="bannerImage" name="bannerImage"><br><br>
+    <label for="bannerFile">Imagen Banner (Fichero):</label><br>
+    <input type="file" id="bannerFile" name="bannerFile"><br><br>
 
-    <label for="cardImage">URL Imagen Carta:</label><br>
-    <input type="text" id="cardImage" name="cardImage"><br><br>
+    <label for="cardFile">Imagen Carta (Fichero):</label><br>
+    <input type="file" id="cardFile" name="cardFile"><br><br>
 
     <button type="submit">Guardar Juego</button>
 </form>

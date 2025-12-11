@@ -6,6 +6,8 @@
     <style>
         table, th, td { border: 1px solid black; border-collapse: collapse; padding: 5px; }
         th { background-color: #f2f2f2; }
+        /* Centrar contenido de las celdas */
+        td { text-align: center; vertical-align: middle; }
     </style>
 </head>
 <body>
@@ -23,7 +25,7 @@
         <th>ID Asociado</th>
         <th>Imagen Banner</th>
         <th>Imagen Carta</th>
-    </tr>
+        <th>Acciones</th> </tr>
     </thead>
     <tbody>
     <tr th:each="game : ${games}">
@@ -31,8 +33,21 @@
         <td th:text="${game.name}">Nombre Juego</td>
         <td th:text="${game.description}">Descripción...</td>
         <td th:text="${game.associatedID}">ID asociado</td>
-        <td th:text="${game.bannerImage}">Imagen de banner</td>
-        <td th:text="${game.cardImage}">Imagen de carta</td>
+
+        <td>
+            <img th:src="@{/files/{filename}(filename=${game.bannerImage})}"
+                 alt="Banner"
+                 style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;"
+                 th:if="${game.bannerImage != null and !game.bannerImage.isEmpty()}"/>
+        </td>
+
+        <td>
+            <img th:src="@{/files/{filename}(filename=${game.cardImage})}"
+                 alt="Card"
+                 style="width: 80px; height: 80px; object-fit: cover; border-radius: 4px;"
+                 th:if="${game.cardImage != null and !game.cardImage.isEmpty()}"/>
+        </td>
+
         <td>
             <form action="#" th:action="@{/games/delete}" method="post">
                 <input type="hidden" name="id" th:value="${game.id}" />
