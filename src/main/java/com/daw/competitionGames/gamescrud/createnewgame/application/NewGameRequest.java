@@ -6,7 +6,7 @@ public class NewGameRequest {
 
     private String name;
     private String description;
-    private AssociatedID associatedID;
+    private AssociatedID associatedID; // El nombre del campo
     private String bannerImage;
     private String cardImage;
 
@@ -28,7 +28,11 @@ public class NewGameRequest {
 
     public void setName(String name) {this.name = name;}
     public void setDescription(String description) {this.description = description;}
-    public void setPlatform(AssociatedID associatedID) {this.associatedID = associatedID;}
+
+    // --- CORRECCIÓN AQUÍ ---
+    // Antes se llamaba 'setPlatform', ahora debe coincidir con el campo: 'setAssociatedID'
+    public void setAssociatedID(AssociatedID associatedID) {this.associatedID = associatedID;}
+
     public void setBannerImage(String bannerImage) {this.bannerImage = bannerImage;}
     public void setCardImage(String cardImage) {this.cardImage = cardImage;}
 }
