@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Juego</title>
+</head>
+<body>
+<h1>Registrar Nuevo Juego</h1>
+
+<form id="newGameForm">
+    <label for="name">Nombre:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="associatedID">Plataforma:</label><br>
+    <select id="associatedID" name="associatedID">
+        <option value="EA_ID">EA_ID</option>
+        <option value="RIOT_ID">RIOT_ID</option>
+        <option value="EPIC_ID">EPIC_ID</option>
+    </select><br><br>
+
+    <label for="description">Descripción:</label><br>
+    <textarea id="description" name="description"></textarea><br><br>
+
+    <label for="bannerFile">Imagen Banner:</label><br>
+    <input type="file" id="bannerFile" name="bannerFile" accept="image/*" required><br><br>
+
+    <label for="cardFile">Imagen Carta:</label><br>
+    <input type="file" id="cardFile" name="cardFile" accept="image/*" required><br><br>
+
+    <button type="submit">Guardar Juego</button>
+</form>
+
+<br>
+<a href="/index.html">Volver a la lista</a>
+
+<script src="form.js"></script>
+<script>
+    document.getElementById('newGameForm').addEventListener('submit', createGame);
+</script>
+</body>
+</html>
