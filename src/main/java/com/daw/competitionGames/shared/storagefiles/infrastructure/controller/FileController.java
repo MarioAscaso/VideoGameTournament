@@ -17,25 +17,18 @@ public class FileController {
 
     private final StorageService storageService;
 
-    public FileController(StorageService storageService) {
-        this.storageService = storageService;
-    }
+    public FileController(StorageService storageService) {this.storageService = storageService;}
 
-    // Endpoint existente (opcional si ya usas el otro controller para subir)
     @PostMapping("/")
     public String handleFileUpload(@RequestParam("file") MultipartFile aFile) {
         storageService.store(aFile);
         return "redirect:/";
     }
 
-    // --- NUEVO MÉTODO PARA SERVIR IMÁGENES ---
     @GetMapping("/files/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-        // Nota: Asegúrate de haber añadido el método 'loadAsResource' en tu FileService
-        // como te indiqué en el paso anterior, o esto dará error de compilación.
         Resource file = storageService.loadAsResource(filename);
-
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + file.getFilename() + "\"")
                 .body(file);

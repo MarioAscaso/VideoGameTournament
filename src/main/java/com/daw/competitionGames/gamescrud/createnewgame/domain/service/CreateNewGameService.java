@@ -10,9 +10,7 @@ public class CreateNewGameService {
 
     private final GameRepository gameRepository;
 
-    public CreateNewGameService(GameRepository gameRepository) {
-        this.gameRepository = gameRepository;
-    }
+    public CreateNewGameService(GameRepository gameRepository) {this.gameRepository = gameRepository;}
 
     public void execute(NewGameRequest request) {
         Game game = new Game(
@@ -22,7 +20,6 @@ public class CreateNewGameService {
                 request.getBannerImage(),
                 request.getCardImage()
         );
-
         gameRepository.save(game);
     }
 

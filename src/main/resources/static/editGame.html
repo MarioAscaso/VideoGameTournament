@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Juego</title>
+</head>
+<body>
+<h1>Editar Juego</h1>
+
+<form id="editGameForm">
+    <input type="hidden" id="gameId" name="id">
+
+    <label for="name">Nombre:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="associatedID">Plataforma:</label><br>
+    <select id="associatedID" name="associatedID">
+        <option value="EA_ID">EA_ID</option>
+        <option value="RIOT_ID">RIOT_ID</option>
+        <option value="EPIC_ID">EPIC_ID</option>
+    </select><br><br>
+
+    <label for="description">Descripción:</label><br>
+    <textarea id="description" name="description"></textarea><br><br>
+
+    <p><i>Opcional: Sube nuevas imágenes solo si quieres cambiarlas.</i></p>
+    <label for="bannerFile">Banner:</label><br>
+    <input type="file" id="bannerFile" name="bannerFile" accept="image/*"><br><br>
+
+    <label for="cardFile">Carta:</label><br>
+    <input type="file" id="cardFile" name="cardFile" accept="image/*"><br><br>
+
+    <button type="submit">Actualizar</button>
+</form>
+<br>
+<a href="/index.html">Cancelar</a>
+
+<script src="form.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', loadGameForEdit);
+    document.getElementById('editGameForm').addEventListener('submit', updateGame);
+</script>
+</body>
+</html>

@@ -11,9 +11,7 @@ public class ListGamesApp {
 
     private final ListGamesService listGamesService;
 
-    public ListGamesApp(ListGamesService listGamesService) {
-        this.listGamesService = listGamesService;
-    }
+    public ListGamesApp(ListGamesService listGamesService) {this.listGamesService = listGamesService;}
 
     public List<Game> execute(){return listGamesService.listAllGames();}
 }

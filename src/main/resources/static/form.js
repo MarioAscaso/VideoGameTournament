@@ -1,107 +1,99 @@
-// Rutas de tu API (coinciden con tus @Controller)
-const API_BASE_URL = "/api/games"; // Para listar y borrar
-const CREATE_URL = "/game/new";    // Para crear (subida de ficheros)
+const API_BASE_URL = "/api/games";
+const CREATE_URL   = "/game/new";
+const UPDATE_URL   = "/game/update";
+const DELETE_URL   = "/games/delete";
 
-/**
- * 1. Lógica para LISTAR juegos (index.html)
- */
 async function loadGames() {
     const tableBody = document.getElementById('gamesTableBody');
-
-    // Si no estamos en la página de la lista (index.html), salimos
     if (!tableBody) return;
 
     try {
         const response = await fetch(API_BASE_URL);
-
-        if (!response.ok) {
-            throw new Error(`Error HTTP: ${response.status}`);
-        }
-
+        if (!response.ok) throw new Error("Error en servidor");
         const games = await response.json();
-        tableBody.innerHTML = ''; // Limpiar tabla antes de pintar
 
+        tableBody.innerHTML = '';
         if (games.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="7">No hay juegos registrados.</td></tr>';
+            tableBody.innerHTML = '<tr><td colspan="7">No hay juegos.</td></tr>';
             return;
         }
-
         games.forEach(game => {
             const row = document.createElement('tr');
-
-            // Construimos la fila.
-            // IMPORTANTE: Añadimos '/uploads/' delante del nombre de la imagen.
             row.innerHTML = `
                 <td>${game.id}</td>
                 <td>${game.name}</td>
                 <td>${game.description}</td>
                 <td>${game.associatedID}</td>
+                <td>${game.bannerImage ? `<img src="/files/${game.bannerImage}" class="game-image">` : 'Sin imagen'}</td>
+                <td>${game.cardImage ? `<img src="/files/${game.cardImage}" class="game-image">` : 'Sin imagen'}</td>
                 <td>
-                    ${game.bannerImage ? `<img src="/uploads/${game.bannerImage}" alt="Banner" width="80" height="50" style="object-fit: cover;">` : 'Sin imagen'}
-                </td>
-                <td>
-                    ${game.cardImage ? `<img src="/uploads/${game.cardImage}" alt="Carta" width="50" height="70" style="object-fit: cover;">` : 'Sin imagen'}
-                </td>
-                <td>
-                    <button onclick="deleteGame(${game.id})" style="background-color: #ff4444; color: white; border: none; padding: 5px 10px; cursor: pointer;">Eliminar</button>
+                    <button onclick="window.location.href='/editGame.html?id=${game.id}'" style="background-color:orange; cursor:pointer;">Editar</button>
+                    <button onclick="deleteGame(${game.id})" style="background-color:red; color:white; cursor:pointer;">Eliminar</button>
                 </td>
             `;
             tableBody.appendChild(row);
         });
-    } catch (error) {
-        console.error('Error cargando juegos:', error);
-        tableBody.innerHTML = '<tr><td colspan="7" style="color:red">Error conectando con el servidor.</td></tr>';
+    } catch (e) {
+        console.error(e);
+        tableBody.innerHTML = '<tr><td colspan="7">Error de conexión.</td></tr>';
     }
 }
 
-/**
- * 2. Lógica para CREAR juego (newGame.html)
- */
 async function createGame(event) {
-    event.preventDefault(); // Evita que el formulario recargue la página
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    try {
+        const response = await fetch(CREATE_URL, { method: 'POST', body: formData });
+        if (response.ok) {
+            alert("Creado correctamente");
+            window.location.href = '/index.html';
+        } else {
+            alert("Error al crear: " + await response.text());
+        }
+    } catch (e) { alert("Error de red"); }
+}
 
-    // FormData captura automáticamente los textos y los archivos (MultipartFile)
+async function loadGameForEdit() {
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    if (!id || !document.getElementById('editGameForm')) return;
+
+    try {
+        const response = await fetch(`${API_BASE_URL}/${id}`);
+        if (!response.ok) throw new Error("Juego no encontrado");
+        const game = await response.json();
+        document.getElementById('gameId').value = game.id;
+        document.getElementById('name').value = game.name;
+        document.getElementById('description').value = game.description;
+        document.getElementById('associatedID').value = game.associatedID;
+    } catch (e) {
+        alert("Error cargando juego");
+        window.location.href = '/index.html';
+    }
+}
+
+async function updateGame(event) {
+    event.preventDefault();
+    const id = document.getElementById('gameId').value;
     const formData = new FormData(event.target);
 
     try {
-        const response = await fetch(CREATE_URL, {
-            method: 'POST',
-            body: formData
-            // NOTA: No ponemos 'Content-Type': 'application/json' ni 'multipart/form-data'.
-            // El navegador lo detecta y lo pone automáticamente con el "boundary" correcto.
-        });
-
+        const response = await fetch(`${UPDATE_URL}/${id}`, { method: 'POST', body: formData });
         if (response.ok) {
-            alert("¡Juego guardado correctamente!");
-            window.location.href = '/index.html'; // Redirigir a la lista
+            alert("Actualizado correctamente");
+            window.location.href = '/index.html';
         } else {
-            // Intentar leer el error si el servidor devuelve texto
-            const errorText = await response.text();
-            alert('Error al guardar: ' + errorText);
+            alert("Error al actualizar");
         }
-    } catch (error) {
-        console.error('Error de red:', error);
-        alert('Error de conexión con el servidor');
-    }
+    } catch (e) { alert("Error de red"); }
 }
 
-/**
- * 3. Lógica para ELIMINAR juego
- */
 async function deleteGame(id) {
-    if (!confirm('¿Estás seguro de que quieres eliminar este juego permanentemente?')) return;
-
+    if (!confirm("¿Eliminar juego?")) return;
+    const formData = new FormData();
+    formData.append('id', id);
     try {
-        // Petición DELETE a /api/games/{id}
-        const response = await fetch(`${API_BASE_URL}/${id}`, {
-            method: 'DELETE'
-        });
-
-        if (response.ok) {
-            loadGames(); // Recargar la tabla para ver que desaparece
-        } else {
-            alert('No se pudo eliminar el juego.');
-        }
-    } catch (error) {
-        console.error('Error al eliminar:', error);
-    }
+        await fetch(DELETE_URL, { method: 'POST', body: formData });
+        window.location.reload();
+    } catch (e) { window.location.reload(); }
+}

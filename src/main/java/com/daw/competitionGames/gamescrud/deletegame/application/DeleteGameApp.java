@@ -8,9 +8,7 @@ public class DeleteGameApp {
 
     private final DeleteGameService deleteGameService;
 
-    public DeleteGameApp(DeleteGameService deleteGameService) {
-        this.deleteGameService = deleteGameService;
-    }
+    public DeleteGameApp(DeleteGameService deleteGameService) {this.deleteGameService = deleteGameService;}
 
     public void execute(Long id){deleteGameService.execute(id);}
 }

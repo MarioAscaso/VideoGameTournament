@@ -8,9 +8,7 @@ public class CreateNewGameApp {
 
     private final CreateNewGameService newGameService;
 
-    public CreateNewGameApp(CreateNewGameService newGameService){
-        this.newGameService = newGameService;
-    }
+    public CreateNewGameApp(CreateNewGameService newGameService){this.newGameService = newGameService;}
 
     public void execute(NewGameRequest request){newGameService.execute(request);}
 
