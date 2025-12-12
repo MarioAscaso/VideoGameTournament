@@ -2,7 +2,6 @@ package com.daw.competitionGames.shared.storagefiles.domain.service;
 
 import com.daw.competitionGames.shared.storagefiles.core.config.StorageProperties;
 import com.daw.competitionGames.shared.storagefiles.domain.interfaces.StorageService;
-// IMPORT CORRECTO (Spring):
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -45,9 +44,7 @@ public class FileService implements StorageService {
                 System.err.println("Error: fichero vacío");
                 return false;
             }
-            Path destinationFile = this.rootLocation.resolve(
-                            Paths.get(aFile.getOriginalFilename()))
-                    .normalize().toAbsolutePath();
+            Path destinationFile = this.rootLocation.resolve(Paths.get(aFile.getOriginalFilename())).normalize().toAbsolutePath();
 
             if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
                 System.out.println("No se puede almacenar fuera del directorio actual.");
@@ -68,8 +65,6 @@ public class FileService implements StorageService {
     public Resource loadAsResource(String filename) {
         try {
             Path file = rootLocation.resolve(filename);
-            // Ahora 'Resource' se refiere a org.springframework.core.io.Resource,
-            // que es compatible con UrlResource.
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;

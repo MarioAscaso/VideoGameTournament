@@ -1,18 +1,17 @@
-package com.daw.competitionGames.gamescrud.createnewgame.application;
+package com.daw.competitionGames.gamescrud.updategame.application;
 
 import com.daw.competitionGames.shared.domain.AssociatedID;
 
-public class NewGameRequest {
-
+public class UpdateGameRequest {
     private String name;
     private String description;
     private AssociatedID associatedID;
     private String bannerImage;
     private String cardImage;
 
-    public NewGameRequest(){}
+    public UpdateGameRequest() {}
 
-    public NewGameRequest(String name, String description, AssociatedID associatedID, String bannerImage, String cardImage) {
+    public UpdateGameRequest(String name, String description, AssociatedID associatedID, String bannerImage, String cardImage) {
         this.name = name;
         this.description = description;
         this.associatedID = associatedID;

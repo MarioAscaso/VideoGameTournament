@@ -4,8 +4,16 @@
     <meta charset="UTF-8">
     <title>Lista de Juegos</title>
     <style>
-        table, th, td { border: 1px solid black; border-collapse: collapse; padding: 5px; }
-        th { background-color: #f2f2f2; }
+        table, th, td {border: 1px solid black; border-collapse: collapse; padding: 5px}
+        th {background-color: #f2f2f2}
+        .game-image {
+            width: 80px;       /* Ancho fijo */
+            height: 80px;      /* Alto fijo (cuadrado) */
+            object-fit: cover; /* Recorta la imagen para llenar el cuadrado sin deformarla */
+            border-radius: 5px;/* Opcional: Bordes redondeados */
+            display: block;    /* Para evitar espacios extra */
+            margin: auto;      /* Centrado */
+        }
     </style>
 </head>
 <body>
@@ -32,7 +40,6 @@
 
 <script src="form.js"></script>
 <script>
-    // Cargar juegos al iniciar
     document.addEventListener('DOMContentLoaded', loadGames);
 </script>
 </body>

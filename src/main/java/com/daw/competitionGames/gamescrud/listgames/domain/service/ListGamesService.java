@@ -13,12 +13,8 @@ public class ListGamesService {
     @Autowired
     private final GameRepository gameRepository;
 
-    public ListGamesService(GameRepository gameRepository) {
-        this.gameRepository = gameRepository;
-    }
+    public ListGamesService(GameRepository gameRepository) {this.gameRepository = gameRepository;}
 
-    public List<Game> listAllGames(){
-        return gameRepository.findAll();
-    }
+    public List<Game> listAllGames(){return gameRepository.findAll();}
 
 }

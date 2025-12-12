@@ -8,9 +8,7 @@ public class DeleteGameService {
 
     private final GameRepository gameRepository;
 
-    public DeleteGameService(GameRepository gameRepository) {
-        this.gameRepository = gameRepository;
-    }
+    public DeleteGameService(GameRepository gameRepository) {this.gameRepository = gameRepository;}
 
     public void execute(Long id){gameRepository.deleteById(id);}
 }

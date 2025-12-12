@@ -3,7 +3,7 @@ package com.daw.competitionGames.shared.domain;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Game")
+@Table(name="game")
 public class Game {
 
     @Id
@@ -14,6 +14,7 @@ public class Game {
 
     private String description;
 
+    @Enumerated(EnumType.STRING)
     private AssociatedID associatedID;
 
     private String bannerImage;
